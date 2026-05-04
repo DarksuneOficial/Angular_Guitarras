@@ -1,5 +1,4 @@
 <h2> Izzy's 🎸</h2>
-
 <h2>Tienda de Guitarras</h2>
 
 <div class="contenedor">
@@ -7,46 +6,49 @@
     <img [src]="guitarra.imagen">
     <h3>{{ guitarra.nombre }}</h3>
     <p>$ {{ guitarra.precio }}</p>
-    <button (click)="verMas(guitarra)">Ver mas</button>
+    
+    <div class="botones-card">
+      <button (click)="verMas(guitarra)">Ver mas</button>
+      <button (click)="agregarAlCarrito(guitarra)" class="btn-comprar">
+        🛒 Agregar
+      </button>
+    </div>
   </div>
 </div>
 
+<!-- Sección de Detalle -->
 <section class="detalle" *ngIf="guitarraSeleccionada">
-    
   <h2>{{ guitarraSeleccionada.nombre }}</h2>
-
   <div class="detalle-card">
     <img [src]="guitarraSeleccionada.imagen">
-
     <div class="info">
       <p><strong>Madera:</strong> {{ guitarraSeleccionada.specs.madera }}</p>
       <p><strong>Pastillas:</strong> {{ guitarraSeleccionada.specs.pastillas }}</p>
       <p><strong>Puente:</strong> {{ guitarraSeleccionada.specs.puente }}</p>
       <p><strong>Uso:</strong> {{ guitarraSeleccionada.specs.uso }}</p>
+      <button (click)="agregarAlCarrito(guitarraSeleccionada)" class="btn-comprar-grande">
+        Añadir al carrito - ${{ guitarraSeleccionada.precio }}
+      </button>
     </div>
   </div>
 </section>
 
-
+<!-- Sección de Especificaciones -->
 <section class="specs">
   <h2>Especificaciones</h2>
-
   <div class="specs-grid">
     <div class="spec-card">
       <h3>Maderas</h3>
       <p>Cuerpos de caoba, aliso y fresno con acabados premium.</p>
     </div>
-
     <div class="spec-card">
       <h3>Sonido</h3>
       <p>Pastillas humbucker y single coil para tonos versátiles.</p>
     </div>
-
     <div class="spec-card">
       <h3>Hardware</h3>
       <p>Puentes fijos y flotantes de alta precisión.</p>
     </div>
-
     <div class="spec-card">
       <h3>Uso</h3>
       <p>Perfectas para rock, metal, blues y otros estilos.</p>
@@ -54,3 +56,39 @@
   </div>
 </section>
 
+<!-- ELEMENTOS DEL CARRITO (Fuera de las secciones para que floten bien) -->
+
+<!-- Botón Flotante -->
+<div class="carrito-flotante" (click)="toggleCarrito()">
+  <span>🛒</span>
+  <div class="badge" *ngIf="carrito.length > 0">{{ carrito.length }}</div>
+</div>
+
+<!-- Ventana Emergente -->
+<div class="carrito-window" [class.active]="showCarrito">
+  <div class="carrito-header">
+    <h3>Tu Carrito</h3>
+    <button class="close-cart" (click)="toggleCarrito()">✕</button>
+  </div>
+  
+  <div class="carrito-body">
+    <div *ngIf="carrito.length === 0" class="vacio">Tu carrito está vacío 🎸</div>
+    
+    <div class="carrito-item" *ngFor="let item of carrito; let i = index">
+      <img [src]="item.imagen" alt="guitarra">
+      <div class="item-info">
+        <p>{{ item.nombre }}</p>
+        <strong>${{ item.precio }}</strong>
+      </div>
+      <button class="btn-borrar" (click)="eliminarDelCarrito(i)">🗑️</button>
+    </div>
+  </div>
+
+  <div class="carrito-footer" *ngIf="carrito.length > 0">
+    <div class="total">
+      <span>Total:</span>
+      <span>${{ calcularTotal() }}</span>
+    </div>
+    <button class="btn-pagar" (click)="pagar()">PAGAR AHORA</button>
+  </div>
+</div>

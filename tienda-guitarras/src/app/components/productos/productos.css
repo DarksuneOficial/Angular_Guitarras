@@ -1,3 +1,4 @@
+/* --- Estilos Generales --- */
 h2 {
   text-align: center;
   margin-top: 20px;
@@ -5,6 +6,7 @@ h2 {
   letter-spacing: 1px;
 }
 
+/* --- Contenedor de Productos --- */
 .contenedor {
   display: flex;
   justify-content: center;
@@ -43,6 +45,7 @@ p {
   margin-bottom: 10px;
 }
 
+/* --- Botones --- */
 button {
   background: #a1002b; 
   border: none;
@@ -58,6 +61,30 @@ button:hover {
   background: #ff003c;
   transform: scale(1.05);
 }
+
+/* Grupo de botones en la tarjeta */
+.botones-card {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-comprar {
+  background-color: #28a745; /* Puedes cambiarlo a #a1002b si prefieres todo rojo */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-comprar:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+/* --- Sección de Especificaciones --- */
 .specs {
   padding: 60px 20px;
   background: #121212;
@@ -103,11 +130,13 @@ button:hover {
   font-size: 14px;
 }
 
+/* --- Sección de Detalle --- */
 .detalle {
   padding: 50px 20px;
   background: #0f0f0f;
   margin-top: 40px;
   border-top: 1px solid #2a2a2a;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .detalle h2 {
@@ -126,6 +155,7 @@ button:hover {
 .detalle-card img {
   width: 300px;
   border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .info {
@@ -139,4 +169,30 @@ button:hover {
 
 .info strong {
   color: #ff003c;
+}
+
+/* Botón de compra grande en Detalle */
+.btn-comprar-grande {
+  background: linear-gradient(90deg, #28a745, #218838);
+  color: white;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-comprar-grande:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* --- Animaciones --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
